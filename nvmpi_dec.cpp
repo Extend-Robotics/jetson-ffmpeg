@@ -88,16 +88,16 @@ void respondToResolutionEvent(v4l2_format &format, v4l2_crop &crop,nvmpictx* ctx
 
 	}
 
-
 	ret=ctx->dec->setCapturePlaneFormat(format.fmt.pix_mp.pixelformat,format.fmt.pix_mp.width,format.fmt.pix_mp.height);
 	TEST_ERROR(ret < 0, "Error in setting decoder capture plane format", ret);
+
+	ret=ctx->dec->setMaxPerfMode(1);
+	TEST_ERROR(ret < 0, "Error in setting decoder maximum performance mode", ret);
 
 	ctx->dec->getMinimumCapturePlaneBuffers(minimumDecoderCaptureBuffers);
 	TEST_ERROR(ret < 0, "Error while getting value of minimum capture plane buffers",ret);
 
 	ctx->numberCaptureBuffers = minimumDecoderCaptureBuffers + 5;
-
-
 
 	switch (format.fmt.pix_mp.colorspace)
 	{
@@ -363,8 +363,10 @@ nvmpictx* nvmpi_create_decoder(nvCodingType codingType,nvPixFormat pixFormat){
 	}
 
 	ret=ctx->dec->setOutputPlaneFormat(ctx->decoder_pixfmt, CHUNK_SIZE);
-
 	TEST_ERROR(ret < 0, "Could not set output plane format", ret);
+
+	ret=ctx->dec->setMaxPerfMode(1);
+	TEST_ERROR(ret < 0, "Error in setting decoder maximum performance mode", ret);
 
 	//ctx->nalu_parse_buffer = new char[CHUNK_SIZE];
 	ret = ctx->dec->setFrameInputMode(0);
