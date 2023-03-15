@@ -270,6 +270,12 @@ nvmpictx* nvmpi_create_encoder(nvCodingType codingType,nvEncParam * param){
 	ret=ctx->enc->setMaxPerfMode(1);
 	TEST_ERROR(ret < 0, "Error in setting encoder's maximum performance mode", ret);
 
+	//The following values are supported for the poc-type property:
+	//0: POC explicitly specified in each slice header (the default)
+	//2: Decoding/coding order and display order are the same
+	ret=ctx->enc->setPocType(2);
+	TEST_ERROR(ret < 0, "Error in setting Picture Order Control type", ret);
+
 	ret = ctx->enc->setBitrate(ctx->bitrate);
 	TEST_ERROR(ret < 0, "Could not set encoder bitrate", ret);
 
