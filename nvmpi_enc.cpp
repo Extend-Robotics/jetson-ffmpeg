@@ -463,5 +463,7 @@ int nvmpi_encoder_close(nvmpictx* ctx){
 	delete ctx->enc;
 	delete ctx->packet_pools;
 	delete ctx;
+
+	return 0;
 }
 
