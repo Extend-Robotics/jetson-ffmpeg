@@ -82,3 +82,11 @@ install(FILES ${CMAKE_BINARY_DIR}/nvmpi.pc
 	    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 install(FILES ${CMAKE_BINARY_DIR}/nvmpi.pc
 	    DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+
+#############
+## package ##
+#############
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(Packing)
+
